@@ -1,4 +1,4 @@
-class Solution():
+class Solution:
     def part1(self, input_file='input.txt'):
         instructions = []
 
