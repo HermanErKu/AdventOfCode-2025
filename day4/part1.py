@@ -7,30 +7,29 @@ class Solution():
                 paperRollMap.append(list(line.removesuffix('\n')))
 
         result = 0
-        for x in range(len(paperRollMap)):
-            for y in range(len(paperRollMap[x])):
-                if (paperRollMap[x][y] == '@'):
+        for row in range(len(paperRollMap)):
+            for col in range(len(paperRollMap[row])):
+                if (paperRollMap[row][col] == "@"):
                     adjacent = 0
-                    for a in range(-1, 2):
-                        for b in range(-1,2):
-                            try:
-                                if x==0 and y==0:
-                                    adjacent += 0
-                                elif paperRollMap[x-a][y-b] == "@":
-                                    adjacent += 1
-                            except IndexError:
-                                adjacent += 0
-                    
-                    if(adjacent < 4):
+                    for rowSearch in range(-1,2):
+                        for colSearch in range(-1,2):
+                            if (rowSearch == 0 and colSearch == 0):
+                                continue
+                            
+                            newRow = row + rowSearch
+                            newCol = col + colSearch
+                            
+                            if (newRow < 0 or newCol < 0):
+                                continue
+                            if (newRow >= len(paperRollMap) or newCol >= len(paperRollMap[newRow])):
+                                continue
+                            
+                            if (paperRollMap[newRow][newCol] == "@"):
+                                adjacent += 1
+
+                    if adjacent < 4:
                         result += 1
 
         return result
 
-
-#.. 
-#.@@
-# 
-# 
-
-
-print(Solution().part1('input-test.txt'))
+print(Solution().part1('input.txt'))
